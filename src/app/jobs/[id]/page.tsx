@@ -95,17 +95,19 @@ export default function JobDetailPage() {
               </p>
             </section>
 
-            <section>
-              <h2 className="text-xl font-semibold mb-3">Key Requirements</h2>
-              <ul className="space-y-2">
-                {job.requirements.map((req, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">{req}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
+            {job.requirements && job.requirements.length > 0 && (
+              <section>
+                <h2 className="text-xl font-semibold mb-3">Key Requirements</h2>
+                <ul className="space-y-2">
+                  {job.requirements.map((req, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">{req}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
 
             <section className="rounded-xl border bg-muted/30 p-6">
               <h2 className="text-xl font-semibold mb-2">Salary Range</h2>
@@ -113,7 +115,7 @@ export default function JobDetailPage() {
                 {formatSalary(job.salaryMin, job.salaryMax)}
               </p>
               <p className="text-sm text-muted-foreground mt-1">
-                Estimated annual compensation (USD)
+                Estimated annual compensation (INR)
               </p>
             </section>
           </div>

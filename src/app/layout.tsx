@@ -9,11 +9,11 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: {
-    default: "JobBoard — Find Your Next Opportunity",
-    template: "%s | JobBoard",
+    default: "BharatJobs — Find Your Next Opportunity in India",
+    template: "%s | BharatJobs",
   },
   description:
-    "Discover featured job listings, search by title, location, and category. Post jobs and manage listings from your employer dashboard.",
+    "Discover top jobs across India in tech, product, design, and operations. Search by title, location, and category and hire smarter.",
 };
 
 export default function RootLayout({

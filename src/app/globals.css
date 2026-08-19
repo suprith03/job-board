@@ -4,24 +4,24 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
+    --background: 222 43% 9%;
+    --foreground: 210 40% 98%;
+    --card: 222 39% 12%;
+    --card-foreground: 210 40% 98%;
+    --primary: 26 97% 53%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
+    --secondary: 216 96% 54%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 29% 17%;
+    --muted-foreground: 215 20% 72%;
+    --accent: 166 72% 43%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 72% 60%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.5rem;
+    --border: 216 28% 19%;
+    --input: 216 28% 18%;
+    --ring: 26 97% 53%;
+    --radius: 0.75rem;
   }
 }
 
@@ -29,8 +29,17 @@
   * {
     @apply border-border;
   }
+
+  html {
+    @apply scroll-smooth;
+  }
+
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased font-sans;
+    background-image:
+      radial-gradient(circle at top left, rgba(249, 115, 22, 0.12), transparent 28%),
+      radial-gradient(circle at top right, rgba(59, 130, 246, 0.12), transparent 24%),
+      linear-gradient(to bottom, hsl(var(--background)), hsl(222 42% 10%));
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
@@ -38,5 +47,33 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-orange-400 via-blue-400 to-emerald-400 bg-clip-text text-transparent;
+  }
+
+  .glass-panel {
+    @apply border border-white/10 bg-white/[0.03] backdrop-blur-md;
+  }
+
+  .prose-job {
+    @apply text-muted-foreground leading-relaxed;
+  }
+
+  .prose-job h2 {
+    @apply text-foreground text-xl font-semibold mt-8 mb-3;
+  }
+
+  .prose-job p {
+    @apply mb-4;
+  }
+
+  .prose-job ul {
+    @apply list-disc pl-5 space-y-2 mb-4;
+  }
+
+  .prose-job li {
+    @apply text-muted-foreground;
   }
 }

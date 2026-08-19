@@ -11,6 +11,7 @@ import {
 } from "react";
 import {
   createJobRepository,
+  filterJobs,
   SEED_JOBS,
   type JobRepository,
 } from "@/lib/jobs";
@@ -49,7 +50,7 @@ export function JobsProvider({ children }: { children: ReactNode }) {
   }, [refreshJobs]);
 
   const getJobById = useCallback(
-    (id: string) => jobs.find((j) => j.id === id),
+    (id: string) => jobs.find((job) => job.id === id),
     [jobs]
   );
 
@@ -81,25 +82,7 @@ export function JobsProvider({ children }: { children: ReactNode }) {
   );
 
   const searchJobs = useCallback(
-    (filters: JobFilters) => {
-      return jobs.filter((job) => {
-        if (filters.title) {
-          const query = filters.title.toLowerCase();
-          const matchesTitle = job.title.toLowerCase().includes(query);
-          const matchesCompany = job.company.toLowerCase().includes(query);
-          if (!matchesTitle && !matchesCompany) return false;
-        }
-        if (filters.location) {
-          if (
-            !job.location.toLowerCase().includes(filters.location.toLowerCase())
-          )
-            return false;
-        }
-        if (filters.jobType && job.jobType !== filters.jobType) return false;
-        if (filters.category && job.category !== filters.category) return false;
-        return true;
-      });
-    },
+    (filters: JobFilters) => filterJobs(jobs, filters),
     [jobs]
   );
 

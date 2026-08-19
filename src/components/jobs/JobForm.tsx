@@ -25,14 +25,19 @@ const emptyForm: CreateJobInput = {
   title: "",
   company: "",
   location: "",
+  locationType: "remote",
   jobType: "full-time",
+  experienceLevel: "mid",
   category: "engineering",
   salaryMin: 0,
   salaryMax: 0,
   description: "",
+  companyOverview: "",
+  responsibilities: [""],
   requirements: [""],
+  skills: [""],
   featured: false,
-  employerEmail: "",
+  applicationEmail: "",
 };
 
 export function JobForm({
@@ -47,33 +52,40 @@ export function JobForm({
           title: initialData.title,
           company: initialData.company,
           location: initialData.location,
+          locationType: initialData.locationType,
           jobType: initialData.jobType,
+          experienceLevel: initialData.experienceLevel,
           category: initialData.category,
           salaryMin: initialData.salaryMin,
           salaryMax: initialData.salaryMax,
           description: initialData.description,
-          requirements: initialData.requirements,
+          companyOverview: initialData.companyOverview ?? "",
+          responsibilities: initialData.responsibilities ?? [""],
+          requirements: initialData.requirements ?? [""],
+          skills: initialData.skills ?? [""],
+          applicationEmail: initialData.applicationEmail ?? initialData.employerEmail ?? "",
           featured: initialData.featured,
-          employerEmail: initialData.employerEmail,
         }
       : emptyForm
   );
 
+  const requirements = form.requirements ?? [""];
+
   const updateRequirement = (index: number, value: string) => {
-    const updated = [...form.requirements];
+    const updated = [...requirements];
     updated[index] = value;
     setForm({ ...form, requirements: updated });
   };
 
   const addRequirement = () => {
-    setForm({ ...form, requirements: [...form.requirements, ""] });
+    setForm({ ...form, requirements: [...requirements, ""] });
   };
 
   const removeRequirement = (index: number) => {
-    if (form.requirements.length <= 1) return;
+    if (requirements.length <= 1) return;
     setForm({
       ...form,
-      requirements: form.requirements.filter((_, i) => i !== index),
+      requirements: requirements.filter((_, i) => i !== index),
     });
   };
 
@@ -83,7 +95,7 @@ export function JobForm({
     try {
       const cleaned = {
         ...form,
-        requirements: form.requirements.filter((r) => r.trim() !== ""),
+        requirements: requirements.filter((r) => r.trim() !== ""),
       };
       await onSubmit(cleaned);
     } finally {
@@ -185,15 +197,15 @@ export function JobForm({
           />
         </div>
         <div className="space-y-2 sm:col-span-2">
-          <Label htmlFor="employerEmail">Employer Email *</Label>
+          <Label htmlFor="applicationEmail">Employer Email *</Label>
           <Input
-            id="employerEmail"
+            id="applicationEmail"
             type="email"
             required
             placeholder="hr@company.com"
-            value={form.employerEmail}
+            value={form.applicationEmail ?? ""}
             onChange={(e) =>
-              setForm({ ...form, employerEmail: e.target.value })
+              setForm({ ...form, applicationEmail: e.target.value })
             }
           />
         </div>
@@ -213,7 +225,7 @@ export function JobForm({
 
       <div className="space-y-3">
         <Label>Key Requirements *</Label>
-        {form.requirements.map((req, index) => (
+        {requirements.map((req, index) => (
           <div key={index} className="flex gap-2">
             <Input
               required
@@ -221,7 +233,7 @@ export function JobForm({
               value={req}
               onChange={(e) => updateRequirement(index, e.target.value)}
             />
-            {form.requirements.length > 1 && (
+            {requirements.length > 1 && (
               <Button
                 type="button"
                 variant="outline"

@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { type HTMLAttributes } from "react";
 
 interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
-  variant?: "default" | "secondary" | "outline" | "success";
+  variant?: "default" | "secondary" | "outline" | "success" | "accent";
 }
 
 export function Badge({
@@ -11,16 +11,17 @@ export function Badge({
   ...props
 }: BadgeProps) {
   const variants = {
-    default: "bg-primary/10 text-primary border-primary/20",
-    secondary: "bg-secondary text-secondary-foreground",
-    outline: "border border-input text-foreground",
-    success: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    default: "bg-primary/15 text-primary border-primary/25",
+    secondary: "bg-secondary text-secondary-foreground border-white/5",
+    outline: "border border-white/10 text-foreground bg-transparent",
+    success: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+    accent: "bg-violet-500/10 text-violet-300 border-violet-500/20",
   };
 
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors",
+        "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium transition-colors",
         variants[variant],
         className
       )}

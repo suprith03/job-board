@@ -26,23 +26,45 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* Hero */}
-      <section className="bg-gradient-to-b from-primary/5 to-background border-b">
-        <div className="container mx-auto px-4 py-16 md:py-24 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-balance">
-            Find Your Next{" "}
-            <span className="text-primary">Dream Job</span>
-          </h1>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-            Browse thousands of opportunities from top companies. Search by title,
-            location, job type, or category.
-          </p>
+      <section className="border-b border-white/10 bg-gradient-to-b from-orange-500/10 via-slate-950 to-slate-950">
+        <div className="container mx-auto px-4 py-16 md:py-20">
+          <div className="mx-auto max-w-4xl text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-500/10 px-3 py-1 text-sm font-medium text-orange-200">
+              <Sparkles className="h-4 w-4" />
+              Jobs across India, from startups to unicorns
+            </div>
+            <h1 className="mt-6 text-4xl font-bold tracking-tight text-white md:text-6xl text-balance">
+              Find the right role in
+              <span className="gradient-text"> India&apos;s best companies</span>
+            </h1>
+            <p className="mx-auto mt-5 max-w-2xl text-lg text-slate-300 text-balance">
+              Browse curated openings in Bengaluru, Hyderabad, Pune, Delhi NCR,
+              Mumbai, and remote-first teams across the country.
+            </p>
+
+            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 backdrop-blur-sm">
+                <div className="text-2xl font-bold text-white">2.5L+</div>
+                <div className="text-sm text-slate-300">job seekers hired</div>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 backdrop-blur-sm">
+                <div className="text-2xl font-bold text-white">50+</div>
+                <div className="text-sm text-slate-300">cities covered</div>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 backdrop-blur-sm">
+                <div className="text-2xl font-bold text-white">₹4L+</div>
+                <div className="text-sm text-slate-300">average monthly pay</div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Search & Filters */}
       <section className="container mx-auto px-4 py-8 space-y-6">
-        <JobSearchBar filters={filters} onFiltersChange={setFilters} />
+        <JobSearchBar
+          value={filters.title ?? ""}
+          onChange={(value) => setFilters({ ...filters, title: value })}
+        />
         <CategoryFilter
           selected={(filters.category as JobCategory) ?? ""}
           onSelect={(category) =>
